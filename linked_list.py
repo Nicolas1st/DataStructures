@@ -70,17 +70,32 @@ class SinglyLinkedList:
             index += 1
 
 
-    # def insert(self, node_index):
+    def insert(self, value, node_index):
 
-    #     node = self.first_node 
-    #     index = 0 
+        if node_index < 0:
+            print(f"Can not insert the {value} at index {node_index}")
+            return False
 
-    #     while node is not None:
+        if node_index == 0:
+            self.first_node = Node(value, self.first_node)
+            return True
 
-    #         if node_index == index:
-    #             pass
-                 
+        previous_node = self.first_node 
+        index = 1 
 
+        while previous_node is not None:
+
+            node = previous_node.next_node 
+
+            if node_index == index:
+                next_node = previous_node.next_node
+                previous_node.next_node = Node(value, next_node)
+                return True
+
+            previous_node = node
+            index += 1
+
+        return False
 
 
     def read(self, node_index):
@@ -123,8 +138,11 @@ if __name__ == "__main__":
     print(linked_list)
 
     linked_list.delete(5)
-    print(linked_list.read(5))
     print(linked_list)
 
+    print(linked_list.read(5))
 
-
+    linked_list.insert(11, 1)
+    linked_list.insert(12, 0)
+    linked_list.insert("last element", 11)
+    print(linked_list)
